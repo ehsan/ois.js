@@ -109,7 +109,7 @@ namespace OIS
 			Tries to create an object with the specified vendor. If you have no
 			preference of vendor, leave vender as default (""). Raises exception on failure
 		*/
-		Object* createInputObject( Type iType, bool bufferMode, const std::string &vendor = "");
+		virtual Object* createInputObject( Type iType, bool bufferMode, const std::string &vendor = "");
 
 		/**
 		@remarks Destroys Input Object

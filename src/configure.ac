@@ -22,7 +22,7 @@ CXXFLAGS="$CXXFLAGS"
 LIBS="$LIBS"
 
 dnl Detect X11
-AC_CHECK_HEADERS([X11/Xaw/Command.h],, [AC_MSG_ERROR("libxaw headers not found")])
+#AC_CHECK_HEADERS([X11/Xaw/Command.h],, [AC_MSG_ERROR("libxaw headers not found")])
 
 dnl Added for BSD's
 AC_PROG_LIBTOOL

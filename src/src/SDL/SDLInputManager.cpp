@@ -82,7 +82,7 @@ int SDLInputManager::numKeyboards()
 }
 
 //----------------------------------------------------------------------------//
-Object* SDLInputManager::createInputObject( Type iType, bool bufferMode )
+Object* SDLInputManager::createInputObject( Type iType, bool bufferMode, const std::string &vendor )
 {
 	Object* obj = 0;
 	

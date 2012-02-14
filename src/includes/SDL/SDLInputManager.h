@@ -48,7 +48,7 @@ namespace OIS
 		virtual int numKeyboards();
 		
 		/** @copydoc InputManager::createInputObject */
-		Object* createInputObject( Type iType, bool bufferMode );
+		Object* createInputObject( Type iType, bool bufferMode, const std::string &vendor = "" );
 		/** @copydoc InputManager::destroyInputObject */
 		void destroyInputObject( Object* obj );
 

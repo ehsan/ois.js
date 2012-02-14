@@ -88,8 +88,8 @@ Object* SDLInputManager::createInputObject( Type iType, bool bufferMode )
 	
 	switch( iType )
 	{
-		case OISKeyboard: obj = new SDLKeyboard( bufferMode ); break;
-		case OISMouse: obj = new SDLMouse( bufferMode ); break;
+		case OISKeyboard: obj = new SDLKeyboard( this, bufferMode ); break;
+		case OISMouse: obj = new SDLMouse( this, bufferMode ); break;
 		case OISJoyStick: 
 		default: OIS_EXCEPT( E_InputDeviceNotSupported, "Type not implemented");
 	}

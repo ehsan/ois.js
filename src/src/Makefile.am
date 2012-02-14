@@ -10,12 +10,10 @@ libOIS_la_SOURCES = OISInputManager.cpp \
 	OISKeyboard.cpp \
 	OISForceFeedback.cpp \
 	OISException.cpp \
-	./linux/EventHelpers.cpp \
-	./linux/LinuxInputManager.cpp \
-        ./linux/LinuxJoyStickEvents.cpp \
-        ./linux/LinuxForceFeedback.cpp \
-	./linux/LinuxKeyboard.cpp \
-	./linux/LinuxMouse.cpp
+	./SDL/SDLInputManager.cpp \
+	./SDL/SDLJoyStick.cpp \
+	./SDL/SDLKeyboard.cpp \
+	./SDL/SDLMouse.cpp
 
 libOIS_la_LDFLAGS = -release @PACKAGE_VERSION@
 #libOIS_la_LDFLAGS = -version-info $(shell echo "@PACKAGE_VERSION@" | tr '.' ':')

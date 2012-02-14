@@ -29,11 +29,12 @@ restrictions:
 using namespace OIS;
 
 //-------------------------------------------------------------------//
-SDLKeyboard::SDLKeyboard( bool buffered )
+SDLKeyboard::SDLKeyboard( InputManager* creator, bool buffered )
+	: Keyboard(creator->inputSystemName(), buffered, 0, creator)
 {
 	mBuffered = buffered;
 	mType = OISKeyboard;
-	listener = 0;
+	mListener = 0;
 
 	//Clear our keyboard state buffer
 	memset( &KeyBuffer, 0, 256 );
@@ -169,16 +170,16 @@ void SDLKeyboard::capture()
 		KeyCode kc = mKeyMap[events[i].key.keysym.sym];
 		KeyBuffer[kc] = events[i].key.state;
 
-		if( mBuffered && listener )
+		if( mBuffered && mListener )
 		{
 			if( events[i].key.state == SDL_PRESSED )
 			{
-				if( listener->keyPressed(KeyEvent(this, 0, kc, events[i].key.keysym.unicode)) == false )
+				if( mListener->keyPressed(KeyEvent(this, kc, events[i].key.keysym.unicode)) == false )
 					break;
 			}
 			else
 			{
-				if( listener->keyReleased(KeyEvent(this, 0, kc, events[i].key.keysym.unicode)) == false )
+				if( mListener->keyReleased(KeyEvent(this, kc, events[i].key.keysym.unicode)) == false )
 					break;
 			}
 		}
@@ -188,12 +189,12 @@ void SDLKeyboard::capture()
 	if( KeyBuffer[KC_RMENU] || KeyBuffer[KC_LMENU])
 	{
 		if( KeyBuffer[KC_TAB] )
-			static_cast<SDLInputManager*>(InputManager::getSingletonPtr())->_setGrabMode(false);
+			static_cast<SDLInputManager*>(mCreator)->_setGrabMode(false);
 	}
 }
 
 //-------------------------------------------------------------------//
-bool SDLKeyboard::isKeyDown( KeyCode key )
+bool SDLKeyboard::isKeyDown( KeyCode key ) const
 {
 	return KeyBuffer[key] == 1 ? true : false;
 }
@@ -354,7 +355,7 @@ const std::string& SDLKeyboard::getAsString( KeyCode kc )
 }
 
 //-------------------------------------------------------------------//
-void SDLKeyboard::copyKeyStates( char keys[256] )
+void SDLKeyboard::copyKeyStates( char keys[256] ) const
 {
 	for(int i = 0; i < 256; ++i)
 		keys[i] = KeyBuffer[i];

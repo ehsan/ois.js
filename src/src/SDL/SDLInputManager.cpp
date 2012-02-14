@@ -32,7 +32,7 @@ using namespace OIS;
 const std::string SDLInputManager::iName = "SDL Input Wrapper";
 
 //--------------------------------------------------------------------------------//
-SDLInputManager::SDLInputManager() : mGrabbed(false)
+SDLInputManager::SDLInputManager() : InputManager("SDLInputManager"), mGrabbed(false)
 {
 }
 
